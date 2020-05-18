@@ -67,7 +67,6 @@ const Tabs = {
       }
     },
     setActivePanelRef(ref) {
-      console.log(ref)
       this.tabState.activePanelRef = ref
     },
     focusActivePanel() {

@@ -14,7 +14,6 @@ const TabPanel = {
   watch: {
     isActive(isActive) {
       if (isActive) {
-        console.log(this.$el)
         this.setActivePanelRef(this.$el)
       }
     },
