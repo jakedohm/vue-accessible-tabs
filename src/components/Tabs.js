@@ -6,6 +6,7 @@ const Tabs = {
     id: null,
     defaultIndex: {
       type: Number,
+      default: 0,
       required: false,
     },
     orientation: {
@@ -22,7 +23,7 @@ const Tabs = {
   data() {
     return {
       tabState: {
-        activeTab: this.defaultIndex || 0,
+        activeTab: this.defaultIndex,
         activePanelRef: null,
         focusedTab: null,
         _id: this.id ? useCustomId(this.id) : useId(),
