@@ -22,7 +22,7 @@
     <TabPanel>
       <div>Panel #3</div>
     </TabPanel>
-  </TabPabels>
+  </TabPanels>
 </Tabs>
 ```
 
