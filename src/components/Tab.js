@@ -35,7 +35,7 @@ const Tab = {
       ) {
         event.preventDefault()
 
-        this.setActiveTab(({ currentIndex, tabCount }) => {
+        this.tablistSetActiveTab(({ currentIndex, tabCount }) => {
           return (currentIndex + 1) % tabCount
         })
       }
@@ -46,7 +46,7 @@ const Tab = {
       ) {
         event.preventDefault()
 
-        this.setActiveTab(({ currentIndex, tabCount }) => {
+        this.tablistSetActiveTab(({ currentIndex, tabCount }) => {
           return (currentIndex - 1 + tabCount) % tabCount
         })
       }
@@ -61,17 +61,17 @@ const Tab = {
       if (event.key === 'Home') {
         event.preventDefault()
 
-        this.setActiveTab(0)
+        this.tablistSetActiveTab(0)
       }
 
       if (event.key === 'End') {
         event.preventDefault()
 
-        this.setActiveTab(({ tabCount }) => tabCount - 1)
+        this.tablistSetActiveTab(({ tabCount }) => tabCount - 1)
       }
     },
     handleClick() {
-      this.setActiveTab(this.index, { force: true })
+      this.tablistSetActiveTab(this.index, { force: true })
     },
   },
   watch: {
@@ -102,7 +102,12 @@ const Tab = {
       this.$slots.default
     )
   },
-  inject: ['tabState', 'setActiveTab', 'focusActivePanel', 'tabOrientation'],
+  inject: [
+    'tabState',
+    'tablistSetActiveTab',
+    'focusActivePanel',
+    'tabOrientation',
+  ],
 }
 
 export default Tab

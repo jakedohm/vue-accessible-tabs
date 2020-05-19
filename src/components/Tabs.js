@@ -1,4 +1,5 @@
 import { useId, useCustomId } from '../utils/ids'
+import { cleanChildren } from '../utils/vnode'
 
 const Tabs = {
   name: 'Tabs',
@@ -26,41 +27,12 @@ const Tabs = {
     }
   },
   computed: {
-    tabCount() {
-      return this.$slots.default ? this.$slots.default.length + 1 : 0
-    },
-    isOnLastTab() {
-      return this.tabState.activeTab === this.tabCount
-    },
-    isOnFirstTab() {
-      return this.tabState.activeTab === 0
-    },
     isManual() {
       return this.tabActivationMode === 'manual'
     },
   },
   methods: {
-    setActiveTab(updater, { force = false } = {}) {
-      const activeTab = this.isManual
-        ? this.tabState.focusedTab !== null
-          ? this.tabState.focusedTab
-          : 0
-        : this.tabState.activeTab
-
-      const newActiveTab =
-        typeof updater === 'number'
-          ? updater
-          : updater({
-              currentIndex: activeTab,
-              tabCount: this.tabCount,
-              isOnLastTab: this.isOnLastTab,
-              isOnFirstTab: this.isOnFirstTab,
-            })
-
-      // If the updater return value is false, then we shouldn't run the update
-      if (newActiveTab === false) return
-
-      // DO IT 👊
+    setActiveTab(newActiveTab, { force = false } = {}) {
       this.tabState.focusedTab = newActiveTab
       if (force || !this.isManual) {
         this.tabState.activeTab = newActiveTab
@@ -85,6 +57,7 @@ const Tabs = {
       setActivePanelRef: this.setActivePanelRef,
       focusActivePanel: this.focusActivePanel,
       tabOrientation: this.orientation,
+      tabActivationMode: this.tabActivationMode,
     }
   },
   render(createElement) {
