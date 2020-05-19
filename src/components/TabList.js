@@ -8,7 +8,16 @@ const TabList = {
       node.componentOptions.propsData.index = index
     })
 
-    return createElement('div', this.$slots.default)
+    return createElement(
+      'div',
+      {
+        attrs: {
+          role: 'tablist',
+          'aria-orientation': this.tabOrientation
+        }
+      }, 
+      this.$slots.default
+    )
   },
   inject: ['tabOrientation'],
 }
