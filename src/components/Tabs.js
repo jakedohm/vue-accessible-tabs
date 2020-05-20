@@ -5,6 +5,11 @@ const Tabs = {
   name: 'Tabs',
   props: {
     id: null,
+    defaultIndex: {
+      type: Number,
+      default: 0,
+      required: false,
+    },
     orientation: {
       type: String,
       default: 'horizontal',
@@ -19,7 +24,7 @@ const Tabs = {
   data() {
     return {
       tabState: {
-        activeTab: 0,
+        activeTab: this.defaultIndex,
         activePanelRef: null,
         focusedTab: null,
         _id: this.id ? useCustomId(this.id) : useId(),
